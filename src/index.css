@@ -6,8 +6,10 @@
   --color-purple: #6c63ff;
   --color-dark-purple: #534cc2;
   --color-black: #252525;
-  --color-light-purple:#C4C1FF;
+  --color-light-purple: #c4c1ff;
   --color-light-lavender: #c3c1e5;
+
+  --color-wild-sand: #f7f7f7;
 
   /* Fonts */
   --font-sans: "Kanit", sans-serif;

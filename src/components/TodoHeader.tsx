@@ -1,3 +1,6 @@
+import { OPTIONS } from "../constants/options";
+import { Select } from "./Select";
+
 export function TodoHeader() {
   return (
     <div className="flex flex-col gap-4.5">
@@ -15,12 +18,7 @@ export function TodoHeader() {
             </svg>
           </button>
         </div>
-        <button className="flex items-center gap-7 text-lg text-white bg-purple p-2.5 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-300">
-          <span className="font-medium text-lg">ALL</span>
-          <svg className="w-2 h-2">
-            <use href="/src/assets/icons/sprite.svg#chevron-icon" />
-          </svg>
-        </button>
+        <Select options={OPTIONS}/>
         <button className="flex items-center gap-7 text-lg text-white bg-purple p-2 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-300">
           <svg className="w-5.5 h-5.5">
             <use href="/src/assets/icons/sprite.svg#moon-icon" />
