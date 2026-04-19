@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import type { SelectProps } from "../types/SelectProps";
+import { SelectItem } from "./SelectItem";
 import clsx from "clsx";
 
 export function Select({ options }: SelectProps) {
@@ -49,16 +50,12 @@ export function Select({ options }: SelectProps) {
         )}
       >
         {options.map((option) => (
-          <div
-            className="px-1.5 py-1.5 hover:bg-purple/15 cursor-pointer text-purple transition-all duration-300"
+          <SelectItem
             key={option.value}
-            onClick={() => {
-              setValue(option.label.toUpperCase());
-              setIsOpen(false);
-            }}
-          >
-            {option.label}
-          </div>
+            option={option}
+            setValue={setValue}
+            setIsOpen={setIsOpen}
+          />
         ))}
       </div>
     </div>
