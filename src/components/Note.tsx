@@ -1,14 +1,17 @@
-import type { Notes } from "../types/Notes";
+import clsx from "clsx";
+import type { NoteItemProps } from "../types/Notes";
 
-export function Note({ notes }: Notes) {
-  return notes.map((note, index) => (
-    <li key={note.id}>
+export function Note({ note, isLast }: NoteItemProps) {
+  return (
+    <li
+      className={clsx(!isLast && 'border-b border-purple/50 pb-3.5 mb-3.5')}
+    >
       <label>
         <input type="checkbox" className="hidden" />
-        <div className="flex justify-between items-center">
-          <div className="flex gap-4 items-center">
+        <div className="flex justify-between items-center gap-3.5">
+          <div className="flex gap-4 items-center min-w-0">
             <div className="w-6.5 h-6.5 border border-purple rounded-xs hover:bg-purple/10 shrink-0" />
-            <p className="text-xl font-medium wrap-anywhere pr-2 min-w-0">
+            <p className="text-xl font-medium wrap-anywhere min-w-0">
               {note.value}
             </p>
           </div>
@@ -27,9 +30,6 @@ export function Note({ notes }: Notes) {
           </div>
         </div>
       </label>
-      {notes.length - 1 !== index && (
-        <div className="h-px w-full bg-purple/50 my-3.5" />
-      )}
     </li>
-  ));
+  );
 }

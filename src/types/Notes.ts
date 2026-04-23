@@ -4,11 +4,11 @@ export type Note = {
   isCompleted: boolean;
 };
 
-export type Notes = {
-  notes: Note[];
+export type NoteListProps = {
+  notesList: Note[];
 };
 
-export type NotesProps = {
-  notes: Note[];
-  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+export type NoteItemProps = {
+  note: Note;
+  isLast: boolean;
 };

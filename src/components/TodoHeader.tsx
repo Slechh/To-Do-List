@@ -1,10 +1,10 @@
 import { OPTIONS } from "../constants/options";
 import { Select } from "./Select";
 import { EmptyNote } from "./EmptyNote";
-import type { NotesProps } from "../types/Notes";
+import type { TodoHeaderProps } from "../types/TodoHeader";
 import { NoteList } from "./NotesList";
 
-export function TodoHeader({ notes, setNotes }: NotesProps) {
+export function TodoHeader({ notes, setNotes }: TodoHeaderProps) {
   return (
     <>
       <div className="flex flex-col gap-4.5">
@@ -23,7 +23,7 @@ export function TodoHeader({ notes, setNotes }: NotesProps) {
                 </svg>
               </button>
             </div>
-            <NoteList notes={notes} />
+            <NoteList notesList={notes} />
           </div>
 
           <Select options={OPTIONS} />
