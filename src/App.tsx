@@ -4,7 +4,7 @@ import { useModal } from "./hooks/useModal";
 import { AddNoteBtn } from "./components/AddNoteBtn";
 import { Layout } from "./components/Layout";
 import { useState } from "react";
-import type { Note } from "./types/Notes";
+import type { NoteType } from "./types/NotesProps";
 
 function App() {
   const {
@@ -16,12 +16,12 @@ function App() {
     handleOpen,
   } = useModal();
 
-  const [notes, setNotes] = useState<Array<Note>>([
+  const [notes, setNotes] = useState<Array<NoteType>>([
     { value: "NOTE1", id: crypto.randomUUID(), isCompleted: false },
     { value: "NOTE2", id: crypto.randomUUID(), isCompleted: false },
     { value: "NOTE3", id: crypto.randomUUID(), isCompleted: false },
   ]);
-
+  
   const createNote = (newNote: string) => {
     setNotes((prev) => [
       ...prev,

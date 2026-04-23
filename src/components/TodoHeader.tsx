@@ -1,7 +1,7 @@
 import { OPTIONS } from "../constants/options";
 import { Select } from "./Select";
 import { EmptyNote } from "./EmptyNote";
-import type { TodoHeaderProps } from "../types/TodoHeader";
+import type { TodoHeaderProps } from "../types/TodoHeaderProps";
 import { NoteList } from "./NotesList";
 
 export function TodoHeader({ notes, setNotes }: TodoHeaderProps) {
@@ -23,7 +23,7 @@ export function TodoHeader({ notes, setNotes }: TodoHeaderProps) {
                 </svg>
               </button>
             </div>
-            <NoteList notesList={notes} />
+            <NoteList notesList={notes} setNotes={setNotes} />
           </div>
 
           <Select options={OPTIONS} />
