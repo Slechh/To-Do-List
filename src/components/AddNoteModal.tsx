@@ -15,11 +15,15 @@ export function AddNoteModal({
         setIsModalOpen(false);
         setInputValue("");
       }
+      if (e.key === "Enter" && inputValue) {
+        createNote(inputValue);
+      }
+      console.log(e.key === "Enter");
     };
 
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [setIsModalOpen, setInputValue]);
+  }, [setIsModalOpen, setInputValue, createNote, inputValue]);
 
   return (
     <div

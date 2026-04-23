@@ -10,7 +10,7 @@ export function NoteList({ notesList, setNotes }: NoteListProps) {
         <Note
           key={note.id}
           note={note}
-          isLast={notesList.length - 1 === index}
+          isLast={notesList.length - 1 === index && notesList.length !== 1}
           setNotes={setNotes}
         />
       ))}
