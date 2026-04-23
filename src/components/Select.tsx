@@ -21,7 +21,7 @@ export function Select({ options }: SelectProps) {
   }, []);
 
   return (
-    <div className="relative w-30" ref={ref}>
+    <div className="relative w-30 h-10" ref={ref}>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className={clsx(

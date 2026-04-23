@@ -7,8 +7,8 @@ export function AddNoteModal({
   setInputValue,
   setIsModalOpen,
   handleClose,
+  createNote,
 }: AddNoteModalProps) {
-
   useEffect(() => {
     const handleKeyClose = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -29,7 +29,7 @@ export function AddNoteModal({
     >
       <div
         className={`w-125 h-72.25 mt-29.5 bg-white rounded-2xl py-4.5 px-7.5 
-              flex flex-col transition-all duration-300
+              flex flex-col transition-all duration-1000
             ${isModalOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-4"}`}
       >
         <h2 className="text-2xl flex justify-center font-medium">NEW NOTE</h2>
@@ -51,7 +51,10 @@ export function AddNoteModal({
             CANCEL
           </button>
 
-          <button className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-300">
+          <button
+            onClick={() => createNote(inputValue)}
+            className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
+          >
             APPLY
           </button>
         </div>
