@@ -4,7 +4,12 @@ import { EmptyNote } from "./EmptyNote";
 import type { TodoHeaderProps } from "../types/TodoHeaderProps";
 import { NoteList } from "./NotesList";
 
-export function TodoHeader({ notes, setNotes }: TodoHeaderProps) {
+export function TodoHeader({
+  notes,
+  setNotes,
+  inputValue,
+  setInputValue,
+}: TodoHeaderProps) {
   return (
     <>
       <div className="flex flex-col gap-4.5">
@@ -23,7 +28,12 @@ export function TodoHeader({ notes, setNotes }: TodoHeaderProps) {
                 </svg>
               </button>
             </div>
-            <NoteList notesList={notes} setNotes={setNotes} />
+            <NoteList
+              notesList={notes}
+              setNotes={setNotes}
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+            />
           </div>
 
           <Select options={OPTIONS} />

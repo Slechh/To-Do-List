@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 
 export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const [isDeletModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isChangeModalOpen, setIsChangeModalOpen] = useState<boolean>(false);
+
+  const [inputCheck, setInputCheck] = useState(note.value);
 
   const toggleNoteComplete = () => {
     setNotes((prev) =>
@@ -18,6 +21,15 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const deleteNote = () => {
     setNotes((prev) => prev.filter((item) => item.id !== note.id));
     setIsDeleteModalOpen(false);
+  };
+
+  const changeNote = () => {
+    setNotes((prev) =>
+      prev.map((item) =>
+        item.id === note.id ? { ...item, value: inputCheck } : item,
+      ),
+    );
+    setIsChangeModalOpen(false);
   };
 
   useEffect(() => {
@@ -70,7 +82,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
             </div>
 
             <div className="flex gap-2.5 shrink-0">
-              <button>
+              <button onClick={() => setIsChangeModalOpen(true)}>
                 <svg className="w-4.5 h-4.5 text-gray-300">
                   <use href="/src/assets/icons/sprite.svg#edit-icon" />
                 </svg>
@@ -114,6 +126,49 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
               className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
             >
               DELETE
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`fixed inset-0 z-50 flex items-start justify-center
+          bg-black/60 transition-all duration-300
+        ${isChangeModalOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+      >
+        <div
+          className={`w-125 h-72.25 mt-29.5 bg-white rounded-2xl py-4.5 px-7.5 
+              flex flex-col transition-all duration-1000
+            ${isChangeModalOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-4"}`}
+        >
+          <h2 className="text-2xl flex justify-center font-medium">
+            CHANGE NOTE
+          </h2>
+          <div className="relative h-8 mt-5.5">
+            <input
+              value={inputCheck}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setInputCheck(e.target.value);
+              }}
+              type="search"
+              className="appearance-none w-full h-full border-[1.5px] border-purple rounded-md outline-none placeholder:text-light-lavender placeholder:font-medium font-inter text-purple px-4 focus:ring-2 focus:ring-light-purple transition-all duration-300"
+              placeholder="Input your note..."
+            />
+          </div>
+
+          <div className="mt-auto flex justify-between text-lg font-medium h-9.5">
+            <button
+              className="flex items-center text-purple border-[1.5px] border-purple px-5 py-0.75 rounded-md hover:bg-purple/40 hover:text-white transition-all duration-300"
+              onClick={() => setIsChangeModalOpen(false)}
+            >
+              CANCEL
+            </button>
+
+            <button
+              onClick={() => changeNote()}
+              className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
+            >
+              CHANGE
             </button>
           </div>
         </div>

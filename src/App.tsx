@@ -21,7 +21,7 @@ function App() {
     { value: "NOTE2", id: crypto.randomUUID(), isCompleted: false },
     { value: "NOTE3", id: crypto.randomUUID(), isCompleted: false },
   ]);
-  
+
   const createNote = (newNote: string) => {
     setNotes((prev) => [
       ...prev,
@@ -32,7 +32,12 @@ function App() {
   console.log(notes);
   return (
     <Layout>
-      <TodoHeader notes={notes} setNotes={setNotes} />
+      <TodoHeader
+        notes={notes}
+        setNotes={setNotes}
+        setInputValue={setInputValue}
+        inputValue={inputValue}
+      />
       <AddNoteBtn handleOpen={handleOpen} />
       <AddNoteModal
         isModalOpen={isModalOpen}

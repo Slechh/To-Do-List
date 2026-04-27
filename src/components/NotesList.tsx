@@ -1,7 +1,12 @@
 import type { NoteListProps } from "../types/NotesProps";
 import { Note } from "./Note";
 
-export function NoteList({ notesList, setNotes }: NoteListProps) {
+export function NoteList({
+  notesList,
+  setNotes,
+  setInputValue,
+  inputValue,
+}: NoteListProps) {
   if (notesList.length < 1) return null;
 
   return (
@@ -12,6 +17,8 @@ export function NoteList({ notesList, setNotes }: NoteListProps) {
           note={note}
           isLast={notesList.length - 1 === index && notesList.length !== 1}
           setNotes={setNotes}
+          setInputValue={setInputValue}
+          inputValue={inputValue}
         />
       ))}
     </ul>
