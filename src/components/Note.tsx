@@ -24,6 +24,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   };
 
   const changeNote = () => {
+    console.log(note.id);
     setNotes((prev) =>
       prev.map((item) =>
         item.id === note.id ? { ...item, value: inputCheck } : item,
@@ -82,7 +83,12 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
             </div>
 
             <div className="flex gap-2.5 shrink-0">
-              <button onClick={() => setIsChangeModalOpen(true)}>
+              <button
+                onClick={() => {
+                  setInputCheck(note.value);
+                  setIsChangeModalOpen(true);
+                }}
+              >
                 <svg className="w-4.5 h-4.5 text-gray-300">
                   <use href="/src/assets/icons/sprite.svg#edit-icon" />
                 </svg>
