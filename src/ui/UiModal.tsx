@@ -1,5 +1,7 @@
 import clsx from "clsx";
-export function UiModal({ children, isModalOpen, className }) {
+import type { UiModalProps } from "../types/UiModal";
+
+export function UiModal({ children, isModalOpen, className }: UiModalProps) {
   return (
     <div
       className={clsx(
