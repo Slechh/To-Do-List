@@ -15,6 +15,7 @@ export function NoteFormModal({
       <h2 className="text-2xl flex justify-center font-medium">{title}</h2>
       <div className="relative h-8 mt-5.5">
         <input
+          disabled={!isOpen}
           value={inputValue}
           onChange={(e) => onChange(e.target.value)}
           type="search"
@@ -32,6 +33,7 @@ export function NoteFormModal({
         </button>
 
         <button
+          disabled={!isOpen}
           onClick={onSubmit}
           className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
         >

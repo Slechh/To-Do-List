@@ -29,6 +29,7 @@ function App() {
     ]);
     handleClose();
   };
+
   console.log(notes);
   return (
     <Layout>
