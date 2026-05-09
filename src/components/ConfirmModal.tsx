@@ -1,6 +1,12 @@
 import { UiModal } from "../ui/UiModal";
+import type { ConfirmModalProps } from "../types/ConfirmModalProps";
 
-export function ConfirmModal({ note, onConfirm, onClose, isOpen }) {
+export function ConfirmModal({
+  note,
+  onConfirm,
+  onClose,
+  isOpen,
+}: ConfirmModalProps) {
   return (
     <UiModal className="min-h-50" isModalOpen={isOpen}>
       <h2 className="text-2xl flex justify-center font-medium">DELETE NOTE</h2>
