@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import type { NoteItemProps } from "../types/NotesProps";
 import { useState, useEffect } from "react";
+import { ConfirmModal } from "./ConfirmModal";
 
 export function Note({ note, isLast, setNotes }: NoteItemProps) {
-  const [isDeletModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isChangeModalOpen, setIsChangeModalOpen] = useState<boolean>(false);
 
   const [inputCheck, setInputCheck] = useState(note.value);
@@ -34,7 +35,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   };
 
   useEffect(() => {
-    if (!isDeletModalOpen) return;
+    if (!isDeleteModalOpen) return;
 
     const handleKeyClose = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -48,7 +49,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
 
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [setIsDeleteModalOpen, setNotes, note.id, isDeletModalOpen]);
+  }, [setIsDeleteModalOpen, setNotes, note.id, isDeleteModalOpen]);
 
   return (
     <>
@@ -102,40 +103,12 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
           </div>
         </label>
       </li>
-      <div
-        className={`fixed inset-0 z-50 flex items-start justify-center
-          bg-black/60 transition-all duration-300
-        ${isDeletModalOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
-      >
-        <div
-          className={`w-125 h-50 mt-29.5 bg-white rounded-2xl py-4.5 px-7.5 
-              flex flex-col transition-all duration-1000
-            ${isDeletModalOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-4"}`}
-        >
-          <h2 className="text-2xl flex justify-center font-medium">
-            DELETE NOTE
-          </h2>
-          <div className="mt-2.5">
-            Are you sure you want to delete note:{" "}
-            <span className="text-purple text-xl">{note.value}</span>?
-          </div>
-          <div className="mt-auto flex justify-between text-lg font-medium h-9.5">
-            <button
-              onClick={() => setIsDeleteModalOpen(false)}
-              className="flex items-center text-purple border-[1.5px] border-purple px-5 py-0.75 rounded-md hover:bg-purple/40 hover:text-white transition-all duration-300"
-            >
-              CANCEL
-            </button>
-
-            <button
-              onClick={() => deleteNote()}
-              className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
-            >
-              DELETE
-            </button>
-          </div>
-        </div>
-      </div>
+      <ConfirmModal
+        note={note}
+        onConfirm={deleteNote}
+        onClose={() => setIsDeleteModalOpen(false)}
+        isOpen={isDeleteModalOpen}
+      />
       <div
         className={`fixed inset-0 z-50 flex items-start justify-center
           bg-black/60 transition-all duration-300
