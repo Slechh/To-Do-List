@@ -28,7 +28,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const changeNote = () => {
     setNotes((prev) =>
       prev.map((item) =>
-        item.id === note.id ? { ...item, value: inputCheck } : item,
+        item.id === note.id ? { ...item, value: inputCheck.trim() } : item,
       ),
     );
     setIsChangeModalOpen(false);

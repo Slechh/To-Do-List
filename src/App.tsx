@@ -25,7 +25,7 @@ function App() {
   const createNote = (newNote: string) => {
     setNotes((prev) => [
       ...prev,
-      { value: newNote, id: crypto.randomUUID(), isCompleted: false },
+      { value: newNote.trim(), id: crypto.randomUUID(), isCompleted: false },
     ]);
     handleClose();
   };
