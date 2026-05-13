@@ -5,5 +5,5 @@ export type NoteFormModalProps = {
   inputValue: string;
   onChange: (e: string) => void;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit: (e: string) => void;
 };

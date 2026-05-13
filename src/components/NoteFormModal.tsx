@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { NoteFormModalProps } from "../types/NoteFormmodalProps";
 import { UiModal } from "../ui/UiModal";
 
@@ -10,6 +11,11 @@ export function NoteFormModal({
   onClose,
   onSubmit,
 }: NoteFormModalProps) {
+  
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const isEmpty = !inputValue.trim();
+  const trimmedValue = inputValue.trim();
+
   return (
     <UiModal className="min-h-72.25" isModalOpen={isOpen}>
       <h2 className="text-2xl flex justify-center font-medium">{title}</h2>
@@ -23,18 +29,28 @@ export function NoteFormModal({
           placeholder="Input your note..."
         />
       </div>
-
+      {isEmpty && isSubmitted && (
+        <p className="mt-2.5 text-sm text-red-500">Введите хотя бы 1 символ</p>
+      )}
       <div className="mt-auto flex justify-between text-lg font-medium h-9.5">
         <button
           className="flex items-center text-purple border-[1.5px] border-purple px-5 py-0.75 rounded-md hover:bg-purple/40 hover:text-white transition-all duration-300"
-          onClick={onClose}
+          onClick={() => {
+            onClose();
+            setIsSubmitted(false);
+          }}
         >
           CANCEL
         </button>
 
         <button
           disabled={!isOpen}
-          onClick={onSubmit}
+          onClick={() => {
+            setIsSubmitted(true);
+            if (!trimmedValue) return;
+            onSubmit(trimmedValue);
+            setIsSubmitted(false);
+          }}
           className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
         >
           {submitText}
