@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 import { OPTIONS } from "../constants/options";
 import { Select } from "./Select";
 import { EmptyNote } from "./EmptyNote";
-import type { TodoHeaderProps } from "../types/TodoHeaderProps";
 import { NoteList } from "./NotesList";
+
+import type { TodoHeaderProps } from "../types/TodoHeaderProps";
 
 export function TodoHeader({
   notes,
@@ -10,6 +13,14 @@ export function TodoHeader({
   inputValue,
   setInputValue,
 }: TodoHeaderProps) {
+  const [inputText, setInputText] = useState("");
+
+  const searchText = inputText.trim().toLowerCase();
+
+  const notesToRender = searchText
+    ? notes.filter((note) => note.value.toLowerCase().includes(searchText))
+    : notes;
+
   return (
     <>
       <div className="flex flex-col gap-4.5">
@@ -18,18 +29,22 @@ export function TodoHeader({
           <div className="flex flex-1 flex-col gap-7.5">
             <div className="relative h-10">
               <input
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
                 type="search"
                 className="appearance-none w-full h-full border-[1.5px] border-purple rounded-md outline-none placeholder:text-light-lavender placeholder:font-medium font-inter text-purple pl-4 pr-10 focus:ring-2 focus:ring-light-purple transition-all duration-300"
                 placeholder="Search note..."
               />
-              <button>
-                <svg className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2">
-                  <use href="/src/assets/icons/sprite.svg#search-icon" />
-                </svg>
-              </button>
+              {searchText && (
+                <button type="button" onClick={() => setInputText("")}>
+                  <svg className="w-3.5 h-3.5 absolute right-3 top-1/2 -translate-y-1/2 text-red-500">
+                    <use href="/src/assets/icons/sprite.svg#cancel-icon" />
+                  </svg>
+                </button>
+              )}
             </div>
             <NoteList
-              notesList={notes}
+              notesList={notesToRender}
               setNotes={setNotes}
               inputValue={inputValue}
               setInputValue={setInputValue}

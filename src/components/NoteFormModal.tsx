@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { NoteFormModalProps } from "../types/NoteFormmodalProps";
+import type { NoteFormModalProps } from "../types/NoteFormModalProps";
 import { UiModal } from "../ui/UiModal";
 
 export function NoteFormModal({
@@ -11,7 +11,6 @@ export function NoteFormModal({
   onClose,
   onSubmit,
 }: NoteFormModalProps) {
-  
   const [isSubmitted, setIsSubmitted] = useState(false);
   const isEmpty = !inputValue.trim();
   const trimmedValue = inputValue.trim();
