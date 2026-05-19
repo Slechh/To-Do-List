@@ -1,4 +1,5 @@
 import type { NoteListProps } from "../types/NotesProps";
+import { EmptyNote } from "./EmptyNote";
 import { Note } from "./Note";
 
 export function NoteList({
@@ -7,7 +8,7 @@ export function NoteList({
   setInputValue,
   inputValue,
 }: NoteListProps) {
-  if (notesList.length < 1) return null;
+  if (notesList.length < 1) return <EmptyNote />;
 
   return (
     <ul className="flex flex-col">

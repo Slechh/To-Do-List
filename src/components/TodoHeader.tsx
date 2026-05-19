@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-import { OPTIONS } from "../constants/options";
 import { Select } from "./Select";
 import { EmptyNote } from "./EmptyNote";
 import { NoteList } from "./NotesList";
 
 import type { TodoHeaderProps } from "../types/TodoHeaderProps";
+import type { NoteType } from "../types/NotesProps";
+import type { FilterType } from "../types/SelectProps";
 
 export function TodoHeader({
   notes,
@@ -14,12 +15,20 @@ export function TodoHeader({
   setInputValue,
 }: TodoHeaderProps) {
   const [inputText, setInputText] = useState("");
-
+  const [value, setValue] = useState<FilterType>("ALL");
   const searchText = inputText.trim().toLowerCase();
 
   const notesToRender = searchText
     ? notes.filter((note) => note.value.toLowerCase().includes(searchText))
     : notes;
+
+  const filters: Record<FilterType, (notes: NoteType[]) => NoteType[]> = {
+    ALL: (notes) => notes,
+    COMPLETE: (notes) => notes.filter((note) => note.isCompleted),
+    INCOMPLETE: (notes) => notes.filter((note) => !note.isCompleted),
+  };
+
+  const filteredNotes = filters[value](notesToRender);
 
   return (
     <>
@@ -44,14 +53,14 @@ export function TodoHeader({
               )}
             </div>
             <NoteList
-              notesList={notesToRender}
+              notesList={filteredNotes}
               setNotes={setNotes}
               inputValue={inputValue}
               setInputValue={setInputValue}
             />
           </div>
 
-          <Select options={OPTIONS} />
+          <Select value={value} setValue={setValue} />
           <button className="flex items-center gap-7 text-lg text-white bg-purple p-2 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-300 h-10">
             <svg className="w-5.5 h-5.5">
               <use href="/src/assets/icons/sprite.svg#moon-icon" />

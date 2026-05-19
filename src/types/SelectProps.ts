@@ -1,8 +1,11 @@
+export type FilterType = "ALL" | "COMPLETE" | "INCOMPLETE";
+
 export type SelectOptionProps = {
   value: number;
-  label: string;
+  label: FilterType;
 };
 
 export type SelectProps = {
-  options: SelectOptionProps[];
+  value: FilterType;
+  setValue: (value: FilterType) => void;
 };

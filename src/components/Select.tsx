@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import type { SelectProps } from "../types/SelectProps";
 import { SelectItem } from "./SelectItem";
 import clsx from "clsx";
+import { OPTIONS } from "../constants/options";
+import type { SelectProps } from "../types/SelectProps";
 
-export function Select({ options }: SelectProps) {
+export function Select({ value, setValue }: SelectProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -29,9 +29,7 @@ export function Select({ options }: SelectProps) {
           isOpen ? "bg-dark-purple " : "bg-purple",
         )}
       >
-        <span className="font-medium text-sm leading-none">
-          {value || "ALL"}
-        </span>
+        <span className="font-medium text-sm leading-none">{value}</span>
         <svg
           className={clsx(
             "w-2 h-2 transition-all duration-300",
@@ -49,11 +47,11 @@ export function Select({ options }: SelectProps) {
             : "opacity-0 invisible -translate-y-1",
         )}
       >
-        {options.map((option) => (
+        {OPTIONS.map((option) => (
           <SelectItem
             key={option.value}
             option={option}
-            setValue={setValue}
+            onChange={setValue}
             setIsOpen={setIsOpen}
           />
         ))}
