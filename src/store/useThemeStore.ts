@@ -31,6 +31,12 @@ export const useThemeStore = create<ThemeStore>()(
     }),
     {
       name: "theme-storage",
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          document.documentElement.classList.remove("light", "dark");
+          document.documentElement.classList.add(state.theme);
+        }
+      },
     },
   ),
 );
