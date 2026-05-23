@@ -8,6 +8,9 @@ import type { TodoHeaderProps } from "../types/TodoHeaderProps";
 import type { NoteType } from "../types/NotesProps";
 import type { FilterType } from "../types/SelectProps";
 
+import { useThemeStore } from "../store/useThemeStore";
+import { useShallow } from "zustand/react/shallow";
+
 export function TodoHeader({
   notes,
   setNotes,
@@ -30,10 +33,19 @@ export function TodoHeader({
 
   const filteredNotes = filters[value](notesToRender);
 
+  const { theme, toggleTheme } = useThemeStore(
+    useShallow((state) => ({
+      theme: state.theme,
+      toggleTheme: state.toggleTheme,
+    })),
+  );
+  console.log(theme);
   return (
     <>
       <div className="flex flex-col gap-4.5">
-        <h1 className="text-[26px] m-auto font-medium">TODO LIST</h1>
+        <h1 className="text-[26px] m-auto font-medium dark:text-white">
+          TODO LIST
+        </h1>
         <div className="flex gap-4">
           <div className="flex flex-1 flex-col gap-7.5">
             <div className="relative h-10">
@@ -41,7 +53,8 @@ export function TodoHeader({
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 type="search"
-                className="appearance-none w-full h-full border-[1.5px] border-purple rounded-md outline-none placeholder:text-light-lavender placeholder:font-medium font-inter text-purple pl-4 pr-10 focus:ring-2 focus:ring-light-purple transition-all duration-300"
+                className="appearance-none w-full h-full border-[1.5px] border-purple rounded-md outline-none placeholder:text-light-lavender placeholder:font-medium font-inter text-purple pl-4 pr-10 focus:ring-2 focus:ring-light-purple dark:border-wild-sand dark:focus:ring-gray 
+                dark:placeholder:text-gray transition-all duration-300"
                 placeholder="Search note..."
               />
               {searchText && (
@@ -61,7 +74,11 @@ export function TodoHeader({
           </div>
 
           <Select value={value} setValue={setValue} />
-          <button className="flex items-center gap-7 text-lg text-white bg-purple p-2 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-300 h-10">
+          <button
+            className="flex items-center gap-7 text-lg text-white bg-purple p-2 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-300 h-10"
+            type="button"
+            onClick={toggleTheme}
+          >
             <svg className="w-5.5 h-5.5">
               <use href="/src/assets/icons/sprite.svg#moon-icon" />
             </svg>

@@ -13,7 +13,7 @@ export function UiModal({ children, isModalOpen, className }: UiModalProps) {
       <div
         className={clsx(
           `w-125 mt-29.5 bg-white rounded-2xl py-4.5 px-7.5 
-              flex flex-col transition-all duration-1000`,
+              flex flex-col dark:bg-black dark:border-[1.5px] dark:border-wild-sand transition-all duration-1000`,
           isModalOpen ? "scale-100 translate-y-0" : "scale-95 -translate-y-4",
           className,
         )}

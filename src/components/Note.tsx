@@ -78,7 +78,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
                 )}
               </div>
 
-              <p className="text-xl font-medium wrap-anywhere min-w-0">
+              <p className="text-xl font-medium wrap-anywhere min-w-0 dark:text-white">
                 {note.value}
               </p>
             </div>

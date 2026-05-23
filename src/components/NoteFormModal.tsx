@@ -17,14 +17,16 @@ export function NoteFormModal({
 
   return (
     <UiModal className="min-h-72.25" isModalOpen={isOpen}>
-      <h2 className="text-2xl flex justify-center font-medium">{title}</h2>
+      <h2 className="text-2xl flex justify-center font-medium dark:text-white">
+        {title}
+      </h2>
       <div className="relative h-8 mt-5.5">
         <input
           disabled={!isOpen}
           value={inputValue}
           onChange={(e) => onChange(e.target.value)}
           type="search"
-          className="appearance-none w-full h-full border-[1.5px] border-purple rounded-md outline-none placeholder:text-light-lavender placeholder:font-medium font-inter text-purple px-4 focus:ring-2 focus:ring-light-purple transition-all duration-300"
+          className="appearance-none w-full h-full border-[1.5px] border-purple rounded-md outline-none placeholder:text-light-lavender placeholder:font-medium font-inter text-black px-4 focus:ring-2 focus:ring-light-purple dark:border-wild-sand dark:focus:ring-gray dark:placeholder:text-gray dark:text-white transition-all duration-300"
           placeholder="Input your note..."
         />
       </div>
