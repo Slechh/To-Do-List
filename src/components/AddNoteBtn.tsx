@@ -7,7 +7,7 @@ export function AddNoteBtn({ handleOpen }: AddNoteBtnProps) {
         onClick={handleOpen}
       >
         <svg className="w-6 h-6 text-white">
-          <use href="/src/assets/icons/sprite.svg#plus-icon" />
+          <use href="/icons/sprite.svg#plus-icon" />
         </svg>
       </button>
     </div>

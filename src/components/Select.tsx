@@ -36,7 +36,7 @@ export function Select({ value, setValue }: SelectProps) {
             isOpen && "rotate-180",
           )}
         >
-          <use href="/src/assets/icons/sprite.svg#chevron-icon" />
+          <use href="/icons/sprite.svg#chevron-icon" />
         </svg>
       </button>
       <div

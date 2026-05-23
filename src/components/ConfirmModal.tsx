@@ -26,8 +26,8 @@ export function ConfirmModal({
         </button>
 
         <button
-          onClick={() => onConfirm()}
-          className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-colors duration-200"
+          onClick={onConfirm}
+          className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
         >
           DELETE
         </button>

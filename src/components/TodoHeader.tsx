@@ -39,7 +39,7 @@ export function TodoHeader({
       toggleTheme: state.toggleTheme,
     })),
   );
-  console.log(theme);
+
   return (
     <>
       <div className="flex flex-col gap-4.5">
@@ -60,7 +60,7 @@ export function TodoHeader({
               {searchText && (
                 <button type="button" onClick={() => setInputText("")}>
                   <svg className="w-3.5 h-3.5 absolute right-3 top-1/2 -translate-y-1/2 text-red-500">
-                    <use href="/src/assets/icons/sprite.svg#cancel-icon" />
+                    <use href="/icons/sprite.svg#cancel-icon" />
                   </svg>
                 </button>
               )}
@@ -80,7 +80,9 @@ export function TodoHeader({
             onClick={toggleTheme}
           >
             <svg className="w-5.5 h-5.5">
-              <use href="/src/assets/icons/sprite.svg#moon-icon" />
+              <use
+                href={`/icons/sprite.svg#${theme === "light" ? "moon" : "sun"}-icon`}
+              />
             </svg>
           </button>
         </div>

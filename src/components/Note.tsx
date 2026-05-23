@@ -56,8 +56,9 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
       <li
         className={clsx(!isLast && "border-b border-purple/50 pb-3.5 mb-3.5")}
       >
-        <label>
+        <label htmlFor={note.id}>
           <input
+            id={note.id}
             onChange={toggleNoteComplete}
             type="checkbox"
             className="hidden"
@@ -68,12 +69,12 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
               <div
                 className={clsx(
                   note.isCompleted && "bg-purple",
-                  "w-6.5 h-6.5 border border-purple rounded-xs shrink-0 flex items-center justify-center transition-all duration-300",
+                  "w-6.5 h-6.5 border border-purple rounded-xs shrink-0 flex items-center justify-center transition-colors duration-300",
                 )}
               >
                 {note.isCompleted && (
                   <svg className="w-4 h-4 text-white">
-                    <use href="/src/assets/icons/sprite.svg#check-icon" />
+                    <use href="/icons/sprite.svg#check-icon" />
                   </svg>
                 )}
               </div>
@@ -91,12 +92,12 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
                 }}
               >
                 <svg className="w-4.5 h-4.5 text-gray-300">
-                  <use href="/src/assets/icons/sprite.svg#edit-icon" />
+                  <use href="/icons/sprite.svg#edit-icon" />
                 </svg>
               </button>
               <button onClick={() => setIsDeleteModalOpen(true)}>
                 <svg className="w-4.5 h-4.5 text-gray-300">
-                  <use href="/src/assets/icons/sprite.svg#delete-icon" />
+                  <use href="/icons/sprite.svg#delete-icon" />
                 </svg>
               </button>
             </div>

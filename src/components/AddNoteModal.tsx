@@ -1,5 +1,5 @@
+import { useEffect, useRef } from "react";
 import type { AddNoteModalProps } from "../types/AddNoteModalProps";
-import { useEffect } from "react";
 import { NoteFormModal } from "./NoteFormModal";
 
 export function AddNoteModal({
@@ -10,21 +10,27 @@ export function AddNoteModal({
   handleClose,
   createNote,
 }: AddNoteModalProps) {
+  
+  const valueRef = useRef(inputValue);
+  useEffect(() => {
+    valueRef.current = inputValue;
+  }, [inputValue]);
+
   useEffect(() => {
     const handleKeyClose = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsModalOpen(false);
         setInputValue("");
       }
-      if (e.key === "Enter" && inputValue) {
-        createNote(inputValue);
+      
+      if (e.key === "Enter" && valueRef.current.trim()) {
+        createNote(valueRef.current);
       }
-      console.log(e.key === "Enter");
     };
 
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [setIsModalOpen, setInputValue, createNote, inputValue]);
+  }, [setIsModalOpen, setInputValue, createNote]); 
 
   return (
     <NoteFormModal

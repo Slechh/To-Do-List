@@ -1,6 +1,5 @@
 import { useModal } from "./hooks/useModal";
-import { useState, useEffect } from "react";
-import { useThemeStore } from "./store/useThemeStore";
+import { useState} from "react";
 
 import { TodoHeader } from "./components/TodoHeader";
 import { Layout } from "./components/Layout";
@@ -24,12 +23,6 @@ function App() {
     { value: "NOTE2", id: crypto.randomUUID(), isCompleted: false },
     { value: "NOTE3", id: crypto.randomUUID(), isCompleted: false },
   ]);
-
-  const theme = useThemeStore((state) => state.theme);
-useEffect(() => {
-  document.documentElement.classList.remove("light", "dark");
-  document.documentElement.classList.add(theme);
-}, [theme]);
 
   const createNote = (newNote: string) => {
     setNotes((prev) => [
