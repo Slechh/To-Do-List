@@ -9,7 +9,7 @@ import type { NoteItemProps } from "../types/NotesProps";
 export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isChangeModalOpen, setIsChangeModalOpen] = useState<boolean>(false);
-
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [inputCheck, setInputCheck] = useState(note.value);
 
   const toggleNoteComplete = () => {
@@ -52,6 +52,30 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
   }, [setIsDeleteModalOpen, setNotes, note.id, isDeleteModalOpen]);
+
+  useEffect(() => {
+    if (!isChangeModalOpen) return;
+    const handleKeyClose = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsChangeModalOpen(false);
+        setIsSubmitted(false);
+      }
+      if (e.key === "Enter") {
+        setIsSubmitted(true);
+        if (!inputCheck.trim()) return;
+        setNotes((prev) =>
+          prev.map((item) =>
+            item.id === note.id ? { ...item, value: inputCheck.trim() } : item,
+          ),
+        );
+        setIsSubmitted(false);
+        setIsChangeModalOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyClose);
+    return () => window.removeEventListener("keydown", handleKeyClose);
+  }, [isChangeModalOpen, inputCheck, note.id, setNotes]);
 
   return (
     <>
@@ -120,6 +144,8 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
         onChange={setInputCheck}
         onClose={() => setIsChangeModalOpen(false)}
         onSubmit={changeNote}
+        showErr={isSubmitted}
+        setShowErr={setIsSubmitted}
       />
     </>
   );

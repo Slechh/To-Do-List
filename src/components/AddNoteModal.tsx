@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { NoteFormModal } from "./NoteFormModal";
 
@@ -8,11 +8,12 @@ export function AddNoteModal({
   isModalOpen,
   inputValue,
   setInputValue,
-  setIsModalOpen,
   handleClose,
   createNote,
 }: AddNoteModalProps) {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const valueRef = useRef(inputValue);
+
   useEffect(() => {
     valueRef.current = inputValue;
   }, [inputValue]);
@@ -20,8 +21,8 @@ export function AddNoteModal({
   useEffect(() => {
     const handleKeyClose = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsModalOpen(false);
-        setInputValue("");
+        handleClose();
+        setIsSubmitted(false);
       }
 
       if (e.key === "Enter" && valueRef.current.trim()) {
@@ -31,7 +32,7 @@ export function AddNoteModal({
 
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [setIsModalOpen, setInputValue, createNote]);
+  }, [handleClose, createNote]);
 
   return (
     <NoteFormModal
@@ -42,6 +43,8 @@ export function AddNoteModal({
       onChange={setInputValue}
       onClose={handleClose}
       onSubmit={() => createNote(inputValue)}
+      showErr={isSubmitted}
+      setShowErr={setIsSubmitted}
     />
   );
 }
