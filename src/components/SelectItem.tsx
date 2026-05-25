@@ -1,4 +1,5 @@
 import type { SelectItemProps } from "../types/SelectItemProps";
+
 export function SelectItem({ option, onChange, setIsOpen }: SelectItemProps) {
   return (
     <div

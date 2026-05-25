@@ -1,8 +1,10 @@
 import clsx from "clsx";
-import type { NoteItemProps } from "../types/NotesProps";
+
 import { useState, useEffect } from "react";
 import { ConfirmModal } from "./ConfirmModal";
 import { NoteFormModal } from "./NoteFormModal";
+
+import type { NoteItemProps } from "../types/NotesProps";
 
 export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);

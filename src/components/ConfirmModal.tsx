@@ -1,4 +1,5 @@
 import { UiModal } from "../ui/UiModal";
+
 import type { ConfirmModalProps } from "../types/ConfirmModalProps";
 
 export function ConfirmModal({

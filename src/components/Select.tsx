@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { SelectItem } from "./SelectItem";
 import clsx from "clsx";
+
 import { OPTIONS } from "../constants/options";
+import { SelectItem } from "./SelectItem";
+
 import type { SelectProps } from "../types/SelectProps";
 
 export function Select({ value, setValue }: SelectProps) {

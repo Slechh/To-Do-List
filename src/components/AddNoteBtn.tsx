@@ -1,4 +1,5 @@
 import type { AddNoteBtnProps } from "../types/AddNoteBtnProps";
+
 export function AddNoteBtn({ handleOpen }: AddNoteBtnProps) {
   return (
     <div className="flex justify-end mt-auto">

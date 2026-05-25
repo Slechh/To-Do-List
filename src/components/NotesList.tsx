@@ -1,6 +1,7 @@
-import type { NoteListProps } from "../types/NotesProps";
 import { EmptyNote } from "./EmptyNote";
 import { Note } from "./Note";
+
+import type { NoteListProps } from "../types/NotesProps";
 
 export function NoteList({
   notesList,

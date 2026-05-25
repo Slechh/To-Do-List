@@ -1,6 +1,8 @@
 import { useState } from "react";
-import type { NoteFormModalProps } from "../types/NoteFormModalProps";
+
 import { UiModal } from "../ui/UiModal";
+
+import type { NoteFormModalProps } from "../types/NoteFormModalProps";
 
 export function NoteFormModal({
   title,
