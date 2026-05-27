@@ -10,13 +10,11 @@ export type SetNotesProps = {
 
 export type NoteListProps = {
   notesList: NoteType[];
-  inputValue: string;
   setInputValue: (value: string) => void;
 } & SetNotesProps;
 
 export type NoteItemProps = {
   note: NoteType;
   isLast: boolean;
-  inputValue: string;
   setInputValue: (value: string) => void;
 } & SetNotesProps;

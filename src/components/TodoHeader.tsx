@@ -13,7 +13,6 @@ import { useShallow } from "zustand/react/shallow";
 export function TodoHeader({
   notes,
   setNotes,
-  inputValue,
   setInputValue,
 }: TodoHeaderProps) {
   const [inputText, setInputText] = useState("");
@@ -67,7 +66,6 @@ export function TodoHeader({
             <NoteList
               notesList={filteredNotes}
               setNotes={setNotes}
-              inputValue={inputValue}
               setInputValue={setInputValue}
             />
           </div>

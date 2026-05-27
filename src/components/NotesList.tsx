@@ -7,7 +7,6 @@ export function NoteList({
   notesList,
   setNotes,
   setInputValue,
-  inputValue,
 }: NoteListProps) {
   if (notesList.length < 1) return <EmptyNote />;
 
@@ -20,7 +19,6 @@ export function NoteList({
           isLast={notesList.length - 1 === index && notesList.length !== 1}
           setNotes={setNotes}
           setInputValue={setInputValue}
-          inputValue={inputValue}
         />
       ))}
     </ul>

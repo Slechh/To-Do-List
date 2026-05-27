@@ -27,6 +27,7 @@ export function AddNoteModal({
         setIsSubmitted(true);
         if (valueRef.current.trim()) {
           createNote(valueRef.current);
+          setIsSubmitted(false);
         }
         return;
       }
