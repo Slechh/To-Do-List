@@ -20,19 +20,26 @@ export function AddNoteModal({
 
   useEffect(() => {
     const handleKeyClose = (e: KeyboardEvent) => {
+      if (!isModalOpen) return;
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        setIsSubmitted(true);
+        if (valueRef.current.trim()) {
+          createNote(valueRef.current);
+        }
+        return;
+      }
+
       if (e.key === "Escape") {
         handleClose();
         setIsSubmitted(false);
       }
-
-      if (e.key === "Enter" && valueRef.current.trim()) {
-        createNote(valueRef.current);
-      }
     };
 
-    window.addEventListener("keydown", handleKeyClose);
-    return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [handleClose, createNote]);
+    document.addEventListener("keydown", handleKeyClose);
+    return () => document.removeEventListener("keydown", handleKeyClose);
+  }, [handleClose, createNote, isModalOpen]);
 
   return (
     <NoteFormModal
