@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { Select } from "./Select";
-import { EmptyNote } from "./EmptyNote";
 import { NoteList } from "./NotesList";
 
 import type { TodoHeaderProps } from "../types/TodoHeaderProps";
@@ -87,7 +86,6 @@ export function TodoHeader({
           </button>
         </div>
       </div>
-      {notes.length < 1 && <EmptyNote />}
     </>
   );
 }

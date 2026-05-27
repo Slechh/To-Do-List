@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ConfirmModal } from "./ConfirmModal";
 import { NoteFormModal } from "./NoteFormModal";
 
@@ -22,10 +22,10 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
     );
   };
 
-  const deleteNote = () => {
+  const deleteNote = useCallback(() => {
     setNotes((prev) => prev.filter((item) => item.id !== note.id));
     setIsDeleteModalOpen(false);
-  };
+  }, [note.id, setNotes]);
 
   const changeNote = () => {
     setNotes((prev) =>
@@ -44,14 +44,13 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
         setIsDeleteModalOpen(false);
       }
       if (e.key === "Enter") {
-        setNotes((prev) => prev.filter((item) => item.id !== note.id));
-        setIsDeleteModalOpen(false);
+        deleteNote();
       }
     };
 
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [setIsDeleteModalOpen, setNotes, note.id, isDeleteModalOpen]);
+  }, [setIsDeleteModalOpen, deleteNote, isDeleteModalOpen]);
 
   useEffect(() => {
     if (!isChangeModalOpen) return;
@@ -80,7 +79,10 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   return (
     <>
       <li
-        className={clsx(!isLast && "border-b border-purple/50 pb-3.5 mb-3.5")}
+        className={clsx(
+          "group",
+          !isLast && "border-b border-purple/50 pb-3.5 mb-3.5",
+        )}
       >
         <label htmlFor={note.id}>
           <input
@@ -110,19 +112,19 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
               </p>
             </div>
 
-            <div className="flex gap-2.5 shrink-0">
+            <div className="flex gap-2.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <button
                 onClick={() => {
                   setInputCheck(note.value);
                   setIsChangeModalOpen(true);
                 }}
               >
-                <svg className="w-4.5 h-4.5 text-gray-300">
+                <svg className="w-4.5 h-4.5 text-gray-500 dark:text-gray-300">
                   <use href="/icons/sprite.svg#edit-icon" />
                 </svg>
               </button>
               <button onClick={() => setIsDeleteModalOpen(true)}>
-                <svg className="w-4.5 h-4.5 text-gray-300">
+                <svg className="w-4.5 h-4.5 text-gray-500 dark:text-gray-300">
                   <use href="/icons/sprite.svg#delete-icon" />
                 </svg>
               </button>
