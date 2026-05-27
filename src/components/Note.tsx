@@ -27,14 +27,14 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
     setIsDeleteModalOpen(false);
   }, [note.id, setNotes]);
 
-  const changeNote = () => {
+  const changeNote = useCallback(() => {
     setNotes((prev) =>
       prev.map((item) =>
         item.id === note.id ? { ...item, value: inputCheck.trim() } : item,
       ),
     );
     setIsChangeModalOpen(false);
-  };
+  }, [note.id, setNotes, inputCheck]);
 
   useEffect(() => {
     if (!isDeleteModalOpen) return;
@@ -62,19 +62,14 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
       if (e.key === "Enter") {
         setIsSubmitted(true);
         if (!inputCheck.trim()) return;
-        setNotes((prev) =>
-          prev.map((item) =>
-            item.id === note.id ? { ...item, value: inputCheck.trim() } : item,
-          ),
-        );
+        changeNote();
         setIsSubmitted(false);
-        setIsChangeModalOpen(false);
       }
     };
 
     window.addEventListener("keydown", handleKeyClose);
     return () => window.removeEventListener("keydown", handleKeyClose);
-  }, [isChangeModalOpen, inputCheck, note.id, setNotes]);
+  }, [isChangeModalOpen, inputCheck, changeNote]);
 
   return (
     <>
