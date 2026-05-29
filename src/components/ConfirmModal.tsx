@@ -15,7 +15,11 @@ export function ConfirmModal({
       </h2>
       <div className="mt-2.5 wrap-anywhere dark:text-white">
         Are you sure you want to delete note:{" "}
-        <span className="text-xl text-black dark:text-white">{note.value}</span>
+        <span className="text-xl text-black dark:text-white">
+          {note.value.length > 50
+            ? note.value.slice(0, 25) + "..."
+            : note.value}
+        </span>
         ?
       </div>
       <div className="mt-auto flex justify-between text-lg font-medium h-9.5">

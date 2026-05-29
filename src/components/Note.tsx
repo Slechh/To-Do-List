@@ -88,11 +88,11 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
             checked={note.isCompleted}
           />
           <div className="flex justify-between items-center gap-3.5">
-            <div className="flex gap-4 items-center min-w-0">
+            <div className="flex gap-4 items-start min-w-0">
               <div
                 className={clsx(
                   note.isCompleted && "bg-purple",
-                  "w-6.5 h-6.5 border border-purple rounded-xs shrink-0 flex items-center justify-center transition-colors duration-300",
+                  "w-7 h-7 border border-purple rounded-xs shrink-0 flex items-center justify-center transition-colors duration-300",
                 )}
               >
                 {note.isCompleted && (

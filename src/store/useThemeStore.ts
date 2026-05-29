@@ -7,19 +7,10 @@ type ThemeStore = {
   toggleTheme: () => void;
 };
 
-const getInitialTheme = (): "light" | "dark" => {
-  try {
-    const stored = JSON.parse(localStorage.getItem("theme-storage") || "{}");
-    return stored?.state?.theme ?? "light";
-  } catch {
-    return "light";
-  }
-};
-
 export const useThemeStore = create<ThemeStore>()(
   persist(
     (set) => ({
-      theme: getInitialTheme(),
+      theme: "light",
 
       toggleTheme: () =>
         set((state) => {

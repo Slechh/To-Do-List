@@ -1,7 +1,18 @@
 import clsx from "clsx";
 import type { UiModalProps } from "../types/UiModal";
+import { useEffect } from "react";
 
 export function UiModal({ children, isModalOpen, className }: UiModalProps) {
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
+
   return (
     <div
       className={clsx(
