@@ -87,8 +87,8 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
             className="hidden"
             checked={note.isCompleted}
           />
-          <div className="flex justify-between items-center gap-3.5">
-            <div className="flex gap-4 items-start min-w-0">
+          <div className="flex justify-between items-start gap-3.5">
+            <div className="flex gap-4 min-w-0">
               <div
                 className={clsx(
                   note.isCompleted && "bg-purple",
