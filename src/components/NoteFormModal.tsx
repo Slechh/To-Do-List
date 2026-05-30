@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { UiModal } from "../ui/UiModal";
 
 import type { NoteFormModalProps } from "../types/NoteFormModalProps";
@@ -16,6 +18,14 @@ export function NoteFormModal({
   const isEmpty = !inputValue.trim();
   const trimmedValue = inputValue.trim();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => inputRef.current?.focus(), 50);
+    }
+  }, [isOpen]);
+
   return (
     <UiModal className="min-h-72.25" isModalOpen={isOpen}>
       <h2 className="text-2xl flex justify-center font-medium dark:text-white">
@@ -23,6 +33,7 @@ export function NoteFormModal({
       </h2>
       <div className="relative h-8 mt-5.5">
         <input
+          ref={inputRef}
           disabled={!isOpen}
           value={inputValue}
           onChange={(e) => onChange(e.target.value)}

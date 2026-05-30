@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+// import { toast } from "sonner"; // 1. Импортируем функцию toast
+
 import { useState, useEffect, useCallback } from "react";
 import { ConfirmModal } from "./ConfirmModal";
 import { NoteFormModal } from "./NoteFormModal";
@@ -34,6 +36,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
       ),
     );
     setIsChangeModalOpen(false);
+    // toast.success("Заметка успешно добавлена!");
   }, [note.id, setNotes, inputCheck]);
 
   useEffect(() => {

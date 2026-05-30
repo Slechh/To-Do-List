@@ -1,6 +1,7 @@
 import { useModal } from "./hooks/useModal";
-import { useState} from "react";
+import { useState } from "react";
 
+// import { Toaster } from "sonner";
 import { TodoHeader } from "./components/TodoHeader";
 import { Layout } from "./components/Layout";
 import { AddNoteModal } from "./components/AddNoteModal";
@@ -35,6 +36,7 @@ function App() {
   console.log(notes);
   return (
     <Layout>
+      {/* <Toaster richColors closeButton /> Просто прописали один раз тут */}
       <TodoHeader
         notes={notes}
         setNotes={setNotes}
