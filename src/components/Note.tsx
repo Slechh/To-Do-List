@@ -121,12 +121,12 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
                   setIsChangeModalOpen(true);
                 }}
               >
-                <svg className="w-4.5 h-4.5 text-gray-500 dark:text-gray-300">
+                <svg className="w-4.5 h-4.5 text-gray-500 dark:text-gray-300 hover:text-purple">
                   <use href="/icons/sprite.svg#edit-icon" />
                 </svg>
               </button>
               <button onClick={() => setIsDeleteModalOpen(true)}>
-                <svg className="w-4.5 h-4.5 text-gray-500 dark:text-gray-300">
+                <svg className="w-4.5 h-4.5 text-gray-500 dark:text-gray-300 hover:text-red">
                   <use href="/icons/sprite.svg#delete-icon" />
                 </svg>
               </button>
