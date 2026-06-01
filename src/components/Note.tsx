@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-// import { toast } from "sonner"; // 1. Импортируем функцию toast
+import { toast } from "sonner";
 
 import { useState, useEffect, useCallback } from "react";
 import { ConfirmModal } from "./ConfirmModal";
@@ -27,6 +27,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const deleteNote = useCallback(() => {
     setNotes((prev) => prev.filter((item) => item.id !== note.id));
     setIsDeleteModalOpen(false);
+    toast.success("Заметка успешно удалена!", { duration: 3000 });
   }, [note.id, setNotes]);
 
   const changeNote = useCallback(() => {
@@ -36,7 +37,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
       ),
     );
     setIsChangeModalOpen(false);
-    // toast.success("Заметка успешно добавлена!");
+    toast.success("Заметка успешно изменена!", { duration: 3000 });
   }, [note.id, setNotes, inputCheck]);
 
   useEffect(() => {

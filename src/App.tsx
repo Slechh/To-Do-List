@@ -1,7 +1,9 @@
 import { useModal } from "./hooks/useModal";
 import { useState } from "react";
 
-// import { Toaster } from "sonner";
+import { toast } from "sonner";
+import { Toaster } from "sonner";
+
 import { TodoHeader } from "./components/TodoHeader";
 import { Layout } from "./components/Layout";
 import { AddNoteModal } from "./components/AddNoteModal";
@@ -31,12 +33,13 @@ function App() {
       { value: newNote.trim(), id: crypto.randomUUID(), isCompleted: false },
     ]);
     handleClose();
+    toast.success("Заметка успешно добавлена!", { duration: 3000 });
   };
 
   console.log(notes);
   return (
     <Layout>
-      {/* <Toaster richColors closeButton /> Просто прописали один раз тут */}
+      <Toaster richColors closeButton position="top-right" />
       <TodoHeader
         notes={notes}
         setNotes={setNotes}
