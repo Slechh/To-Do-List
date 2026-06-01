@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+import { toast } from "sonner";
+
 import { UiModal } from "../ui/UiModal";
 
 import type { NoteFormModalProps } from "../types/NoteFormModalProps";
@@ -12,8 +14,6 @@ export function NoteFormModal({
   onChange,
   onClose,
   onSubmit,
-  showErr,
-  setShowErr,
 }: NoteFormModalProps) {
   const isEmpty = !inputValue.trim();
   const trimmedValue = inputValue.trim();
@@ -42,16 +42,10 @@ export function NoteFormModal({
           placeholder="Input your note..."
         />
       </div>
-      {isEmpty && showErr && (
-        <p className="mt-2.5 text-sm text-red-500">Введите хотя бы 1 символ</p>
-      )}
       <div className="mt-auto flex justify-between text-lg font-medium h-9.5">
         <button
           className="flex items-center text-purple border-[1.5px] border-purple px-5 py-0.75 rounded-md hover:bg-purple/40 hover:text-white transition-all duration-300"
-          onClick={() => {
-            onClose();
-            setShowErr(false);
-          }}
+          onClick={onClose}
         >
           CANCEL
         </button>
@@ -59,10 +53,13 @@ export function NoteFormModal({
         <button
           disabled={!isOpen}
           onClick={() => {
-            setShowErr(true);
+            if (isEmpty)
+              toast.error("Введите хотяб 1 символ", {
+                duration: 3000,
+                id: "empty-input",
+              });
             if (!trimmedValue) return;
             onSubmit(trimmedValue);
-            setShowErr(false);
           }}
           className="flex items-center bg-purple text-white px-5 py-0.75 rounded-md hover:bg-dark-purple hover:[box-shadow:0_0_9px_rgba(108,99,255,0.5)] transition-all duration-200"
         >

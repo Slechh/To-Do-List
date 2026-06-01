@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { NoteFormModal } from "./NoteFormModal";
-
+import { toast } from "sonner";
 import type { AddNoteModalProps } from "../types/AddNoteModalProps";
 
 export function AddNoteModal({
@@ -11,7 +11,6 @@ export function AddNoteModal({
   handleClose,
   createNote,
 }: AddNoteModalProps) {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const valueRef = useRef(inputValue);
 
   useEffect(() => {
@@ -24,17 +23,19 @@ export function AddNoteModal({
 
       if (e.key === "Enter") {
         e.preventDefault();
-        setIsSubmitted(true);
         if (valueRef.current.trim()) {
           createNote(valueRef.current);
-          setIsSubmitted(false);
+        } else {
+          toast.error("Введите хотяб 1 символ", {
+            duration: 3000,
+            id: "empty-input",
+          });
         }
         return;
       }
 
       if (e.key === "Escape") {
         handleClose();
-        setIsSubmitted(false);
       }
     };
 
@@ -51,8 +52,6 @@ export function AddNoteModal({
       onChange={setInputValue}
       onClose={handleClose}
       onSubmit={() => createNote(inputValue)}
-      showErr={isSubmitted}
-      setShowErr={setIsSubmitted}
     />
   );
 }

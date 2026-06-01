@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function useModal() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -8,6 +9,7 @@ export function useModal() {
   const handleClose = () => {
     setIsModalOpen(false);
     setInputValue("");
+    toast.dismiss("empty-input");
   };
 
   return {

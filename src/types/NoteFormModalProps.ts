@@ -6,6 +6,4 @@ export type NoteFormModalProps = {
   onChange: (e: string) => void;
   onClose: () => void;
   onSubmit: (e: string) => void;
-  showErr: boolean;
-  setShowErr: (e: boolean) => void;
 };

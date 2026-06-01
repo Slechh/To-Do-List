@@ -11,7 +11,6 @@ import type { NoteItemProps } from "../types/NotesProps";
 export function Note({ note, isLast, setNotes }: NoteItemProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isChangeModalOpen, setIsChangeModalOpen] = useState<boolean>(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [inputCheck, setInputCheck] = useState(note.value);
 
   const toggleNoteComplete = () => {
@@ -61,13 +60,17 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
     const handleKeyClose = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsChangeModalOpen(false);
-        setIsSubmitted(false);
+        toast.dismiss("empty-input");
       }
       if (e.key === "Enter") {
-        setIsSubmitted(true);
-        if (!inputCheck.trim()) return;
+        if (!inputCheck.trim()) {
+          toast.error("Введите хотяб 1 символ", {
+            duration: 3000,
+            id: "empty-input",
+          });
+          return;
+        }
         changeNote();
-        setIsSubmitted(false);
       }
     };
 
@@ -143,10 +146,11 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
         isOpen={isChangeModalOpen}
         inputValue={inputCheck}
         onChange={setInputCheck}
-        onClose={() => setIsChangeModalOpen(false)}
+        onClose={() => {
+          setIsChangeModalOpen(false);
+          toast.dismiss("empty-input");
+        }}
         onSubmit={changeNote}
-        showErr={isSubmitted}
-        setShowErr={setIsSubmitted}
       />
     </>
   );
