@@ -33,13 +33,13 @@ function App() {
       { value: newNote.trim(), id: crypto.randomUUID(), isCompleted: false },
     ]);
     handleClose();
-    toast.success("Заметка успешно добавлена!", { duration: 3000 });
+    toast.success("Note added successfully!", { duration: 3000 });
   };
 
   console.log(notes);
   return (
     <Layout>
-      <Toaster richColors closeButton position="top-right" />
+      <Toaster richColors closeButton position="top-right"/>
       <TodoHeader
         notes={notes}
         setNotes={setNotes}

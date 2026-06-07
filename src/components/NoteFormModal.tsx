@@ -54,7 +54,7 @@ export function NoteFormModal({
           disabled={!isOpen}
           onClick={() => {
             if (isEmpty)
-              toast.error("Введите хотяб 1 символ", {
+              toast.error("Please enter at least 1 character!", {
                 duration: 3000,
                 id: "empty-input",
               });

@@ -26,7 +26,7 @@ export function AddNoteModal({
         if (valueRef.current.trim()) {
           createNote(valueRef.current);
         } else {
-          toast.error("Введите хотяб 1 символ", {
+          toast.error("Please enter at least 1 character!", {
             duration: 3000,
             id: "empty-input",
           });

@@ -24,10 +24,29 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
   };
 
   const deleteNote = useCallback(() => {
+    const deletedNote = note;
+
     setNotes((prev) => prev.filter((item) => item.id !== note.id));
     setIsDeleteModalOpen(false);
-    toast.success("Заметка успешно удалена!", { duration: 3000 });
-  }, [note.id, setNotes]);
+    toast.success("Note successfully deleted!", {
+      duration: 3000,
+      classNames: {
+        actionButton:
+          "!bg-purple !text-white hover:!bg-dark-purple !transition-all !duration-300",
+      },
+      action: {
+        label: (
+          <span className="flex items-center gap-1 h-9">
+            Undo
+            <svg className="w-4 h-4">
+              <use href="/icons/sprite.svg#undo-icon" />
+            </svg>
+          </span>
+        ),
+        onClick: () => setNotes((prev) => [deletedNote, ...prev]),
+      },
+    });
+  }, [setNotes, note]);
 
   const changeNote = useCallback(() => {
     setNotes((prev) =>
@@ -36,7 +55,9 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
       ),
     );
     setIsChangeModalOpen(false);
-    toast.success("Заметка успешно изменена!", { duration: 3000 });
+    toast.success("The note has been successfully changed!", {
+      duration: 3000,
+    });
   }, [note.id, setNotes, inputCheck]);
 
   useEffect(() => {
@@ -64,7 +85,7 @@ export function Note({ note, isLast, setNotes }: NoteItemProps) {
       }
       if (e.key === "Enter") {
         if (!inputCheck.trim()) {
-          toast.error("Введите хотяб 1 символ", {
+          toast.error("Please enter at least 1 character!", {
             duration: 3000,
             id: "empty-input",
           });
