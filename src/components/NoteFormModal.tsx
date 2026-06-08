@@ -22,7 +22,13 @@ export function NoteFormModal({
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
+      setTimeout(() => {
+        const input = inputRef.current;
+        if (!input) return;
+        input.focus();
+        const len = input.value.length;
+        input.setSelectionRange(len, len);
+      }, 50);
     }
   }, [isOpen]);
 
