@@ -36,7 +36,6 @@ function App() {
     toast.success("Note added successfully!", { duration: 3000 });
   };
 
-  console.log(notes);
   return (
     <Layout>
       <Toaster richColors closeButton position="top-right"/>
